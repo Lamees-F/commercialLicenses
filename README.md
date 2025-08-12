@@ -66,4 +66,4 @@
 يمكنك تجربة النظام مباشرة عبر الرابط التالي على منصة Streamlit:  
 [رابط النشر Streamlit](https://commerciallicenses-3zw6rfcqkdrtev486rbufe.streamlit.app/)
 
-![alt text](image.png)
+<img width="1919" height="1019" alt="image" src="https://github.com/user-attachments/assets/fc625a5f-c207-41af-a5fe-2dac1c676dd7" />
