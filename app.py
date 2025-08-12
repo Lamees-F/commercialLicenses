@@ -2,7 +2,6 @@ import streamlit as st
 import pandas as pd
 import joblib
 
-# Set page config and Arabic styling
 st.set_page_config(page_title="أمانة منطقة الجوف", layout="centered")
 
 st.markdown("""
@@ -15,7 +14,6 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# Sidebar content
 st.sidebar.markdown("""
 ##  نظام التنبؤ الذكي لإصدار الرخص التجارية في منطقة الجوف """)
 
@@ -25,7 +23,7 @@ st.sidebar.markdown("""
 
 st.sidebar.markdown("""### كيفية الاستخدام  
 1. اختر تاريخ تقديم الطلب من التقويم.
-2. أدخل تفاصيل الطلب مثل البلدية، مصدر الطلب، نوع الرخصة، نوع الإجراء، وفئة مدة صلاحية الرخصة.
+2. أدخل تفاصيل الطلب مثل البلدية، وفئة مدة صلاحية الرخصة.
 3. اضغط على زر "تحليل الطلب" للحصول على الاستشارة المناسبة.
 """)
 st.sidebar.markdown("""
@@ -72,9 +70,6 @@ def advise_user(future_date, prophet_model, type_model, activity_model, encoders
     # Build input features
     features = {
         'البلدية': user_input['البلدية'],
-        'مصدر الطلب': user_input['مصدر الطلب'],
-        'نوع الرخصة': user_input['نوع الرخصة'],
-        'نوع اخر اجراء (فوري / غير فوري)': user_input['نوع اخر اجراء (فوري / غير فوري)'],
         'فئة مدة صلاحية الرخصة': user_input['فئة مدة صلاحية الرخصة'],
         'شهر الطلب': month,
         'أسبوع الطلب': week,
@@ -126,20 +121,12 @@ col1, col2 = st.columns(2)
 
 with col1:
     municipality = st.selectbox("اختر البلدية:", encoders['البلدية'].classes_)
-    license_type = st.selectbox("نوع الرخصة:", encoders['نوع الرخصة'].classes_)
     validity_category = st.selectbox("مدة صلاحية الرخصة:", encoders['فئة مدة صلاحية الرخصة'].classes_)
-
-with col2:
-    source = st.selectbox("مصدر الطلب:", encoders['مصدر الطلب'].classes_)
-    procedure_type = st.selectbox("نوع الإجراء (فوري/غير فوري):", encoders['نوع اخر اجراء (فوري / غير فوري)'].classes_)
 
 # Predict button
 if st.button("تحليل الطلب"):
     user_input = {
         'البلدية': municipality,
-        'مصدر الطلب': source,
-        'نوع الرخصة': license_type,
-        'نوع اخر اجراء (فوري / غير فوري)': procedure_type,
         'فئة مدة صلاحية الرخصة': validity_category
     }
 
