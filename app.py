@@ -13,7 +13,7 @@ st.markdown("""
     }
     </style>
 """, unsafe_allow_html=True)
-
+st.sidebar.image("big_logo.png", use_container_width=True)
 st.sidebar.markdown("""
 ##  نظام التنبؤ الذكي لإصدار الرخص التجارية في منطقة الجوف """)
 
